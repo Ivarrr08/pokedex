@@ -1,3 +1,3 @@
 <?php
 
-require Pokemon.php;
+require 'Pokemon.php';
