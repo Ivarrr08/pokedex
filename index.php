@@ -6,4 +6,4 @@ $pikachu = new Pokemon('Pikachu', 'Electric', 60, 60, 'Pika Punch', 'Water', 'Gr
 $charmeleon = new Pokemon('Charmeleon', 'Fire', 60, 60, 'Head Butt', 'Water', 'Grass');
 
 print_r('<pre>' . $pikachu . '</pre>');
-print_r('<pre>' . $charmeleon . '</pre>');
+//print_r('<pre>' . $charmeleon . '</pre>');
