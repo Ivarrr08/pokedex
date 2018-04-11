@@ -4,8 +4,8 @@ class Pokemon {
  	public $name;
  	public $energyType;
  	public $hitpoints;
- 	public $health;
- 	public $attacks = array();
+ 	private $health;
+ 	public $attacks;
  	public $weakness;
  	public $resistance;
 
@@ -20,124 +20,28 @@ class Pokemon {
  		$this->resistance = $resistance;
  	}
 
- 	public function attackOpponent($attacks) {
-
-    }
-
- 	    public function __toString() {
+	public function __toString() {
         return json_encode($this);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 
-    /**
-     * @param mixed $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
+ 	public function attackOpponent($target, $attack) {
+            return $target->defend($this->name, $this->attacks[$attack]->damage, $this->attacks[$attack]->Attack, $this->energyType);
 
-    /**
-     * @return mixed
-     */
-    public function getEnergyType()
-    {
-        return $this->energyType;
-    }
+        }
 
-    /**
-     * @param mixed $energyType
-     */
-    public function setEnergyType($energyType)
-    {
-        $this->energyType = $energyType;
-    }
+        public function defendFromAttack($name, $damage, $AttackName, $EnergyType){
 
-    /**
-     * @return mixed
-     */
-    public function getHitpoints()
-    {
-        return $this->hitpoints;
-    }
+            if($EnergyType == $this->weakness->EnergyType) {
+                $damage = $damage * $this->weakness->value;
 
-    /**
-     * @param mixed $hitpoints
-     */
-    public function setHitpoints($hitpoints)
-    {
-        $this->hitpoints = $hitpoints;
-    }
+            } elseif($EnergyType == $this->resistance->EnergyType) {
+                $damage = $damage - $this->resistance->value;
 
-    /**
-     * @return mixed
-     */
-    public function getHealth()
-    {
-        return $this->health;
-    }
+            }
+            $this->health = $this->health-$damage;
+            return $name . ' attacked ' . $this->name . ' with ' . $AttackName . ' doing ' . $damage . ' damage <br>';
+        }
 
-    /**
-     * @param mixed $health
-     */
-    public function setHealth($health)
-    {
-        $this->health = $health;
-    }
-
-    /**
-     * @return array
-     */
-    public function getAttacks()
-    {
-        return $this->attacks;
-    }
-
-    /**
-     * @param array $attacks
-     */
-    public function setAttacks($attacks)
-    {
-        $this->attacks = $attacks;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getWeakness()
-    {
-        return $this->weakness;
-    }
-
-    /**
-     * @param mixed $weakness
-     */
-    public function setWeakness($weakness)
-    {
-        $this->weakness = $weakness;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getResistance()
-    {
-        return $this->resistance;
-    }
-
-    /**
-     * @param mixed $resistance
-     */
-    public function setResistance($resistance)
-    {
-        $this->resistance = $resistance;
-    }
 
 }

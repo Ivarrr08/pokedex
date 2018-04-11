@@ -2,6 +2,10 @@
 
 class EnergyType
 {
-	public $name;
-	public $type;
+	public $energyType;
+
+	public function __construct($EnergyType)
+    {
+        $this->energyType = $EnergyType;
+    }
 }

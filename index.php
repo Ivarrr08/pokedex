@@ -1,9 +1,17 @@
 <?php
 
 require 'Pokemon.php';
+require 'EnergyType.php';
+require 'Weakness.php';
+require 'Resistance.php';
+require 'Attack.php';
+require 'Pikachu.php';
+require 'Charmeleon.php';
 
-$pikachu = new Pokemon('Pikachu', 'Electric', 60, 60, 'Pika Punch', 'Water', 'Ground');
-$charmeleon = new Pokemon('Charmeleon', 'Fire', 60, 60, 'Head Butt', 'Water', 'Grass');
+$pikachu = new Pikachu('Pikachu');
+$charmeleon = new Charmeleon('Charmeleon');
 
-print_r('<pre>' . $pikachu . '</pre>');
-//print_r('<pre>' . $charmeleon . '</pre>');
+$pikachu->attackOpponent($pikachu->attacks[1], $charmeleon);
+echo"\n";
+$charmeleon->attackOpponent($charmeleon->attacks[0], $pikachu);
+
