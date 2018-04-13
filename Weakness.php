@@ -10,4 +10,22 @@ class Weakness
         $this->EnergyType = $EnergyType;
         $this->multiplier = $Multiplier;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEnergyType()
+    {
+        return $this->EnergyType;
+    }
+
+    /**
+     * @param mixed $EnergyType
+     */
+    public function setEnergyType($EnergyType)
+    {
+        $this->EnergyType = $EnergyType;
+    }
+
+
 }	

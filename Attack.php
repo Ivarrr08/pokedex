@@ -10,4 +10,22 @@ class Attack
         $this->name = $name;
         $this->damage = $damage;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDamage()
+    {
+        return $this->damage;
+    }
+
+    /**
+     * @param mixed $damage
+     */
+    public function setDamage($damage)
+    {
+        $this->damage = $damage;
+    }
+
+
 }

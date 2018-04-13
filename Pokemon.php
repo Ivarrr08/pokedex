@@ -20,28 +20,44 @@ class Pokemon {
  		$this->resistance = $resistance;
  	}
 
-	public function __toString() {
-        return json_encode($this);
+    public function weaknessCheck($pokemon, $target){
+        if ($pokemon->energyType->getEnergyType() === $target->weakness->getEnergyType()->getEnergyType()) {
+            return true;
+        }
+        return false;
     }
 
-
- 	public function attackOpponent($target, $attack) {
-            return $target->defend($this->name, $this->attacks[$attack]->damage, $this->attacks[$attack]->Attack, $this->energyType);
-
+    public function resistanceCheck($pokemon, $target) {
+        if ($pokemon->type->getEnergyType() === $target->weakness->getEnergyType()->getEnergyType()) {
+            return true;
         }
+        return false;
+    }
 
-        public function defendFromAttack($name, $damage, $AttackName, $EnergyType){
+    public function attackOpponent($target, $attack){
+ 	    print($target->name . "Hitpoints:" . $this->health);
 
-            if($EnergyType == $this->weakness->EnergyType) {
-                $damage = $damage * $this->weakness->value;
-
-            } elseif($EnergyType == $this->resistance->EnergyType) {
-                $damage = $damage - $this->resistance->value;
-
-            }
-            $this->health = $this->health-$damage;
-            return $name . ' attacked ' . $this->name . ' with ' . $AttackName . ' doing ' . $damage . ' damage <br>';
+        if ($this->weaknessCheck($this, $target) == true) {
+            $dmg = $attack->getDamage() * $target->weakness->getWeaknessMultiplier();
+            $result = $target->hitpoints - $dmg;
+            print_r($this->name . " attacks " . $target->name . " with " . $attack->getName() . " " . $target->name . " loses " . $dmg . " HP");
+            return print("\n" . "$target->name new HP = " . $result);
         }
+        if ($this->resistanceChecker($this, $target) == true) {
+            $dmg = $attack->getDamage() - $target->getResistvalue();
+            $result = $target->hitpoints - $dmg;
+            print_r($this->name . " attacks " . $target->name . " with " . $attack->getName() . " " . $target->name . " loses " . $dmg . " HP");
+            return print("\n" . "$target->name new HP = " . $result);
+        }
+        $dmg = $attack->getDamage();
+        $result = $target->hitpoints - $dmg;
+        print_r($this->name . " attacks " . $target->name . " with " . $attack->getName() . " " . $target->name . " loses " . $dmg . " HP");
+        return print("\n" . "$target->name new HP = " . $result);
+    }
+
+    public function __toString() {
+        return json_encode($this);
+    }
 
 
 }
